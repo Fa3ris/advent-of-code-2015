@@ -28,6 +28,10 @@ function main() {
 
   r.addCloseListener(() => {
     console.log("total nice", totalNice);
+
+    if (totalNice != 255) {
+      throw Error("invalid response");
+    }
   });
 
   r.run();

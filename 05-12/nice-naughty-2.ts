@@ -2,6 +2,9 @@ import { resolve } from "path";
 import { Reader } from "../helper/reader";
 
 function pairTwice(s: string): boolean {
+  const re = /(?<pair>\w\w).*(\k<pair>)/;
+
+  return re.test(s);
   let res = false;
 
   for (let i = 0; i < s.length - 1; i++) {
@@ -18,6 +21,9 @@ function pairTwice(s: string): boolean {
 }
 
 function repeatWithOneLetterBetween(s: string): boolean {
+  const re = /(?<letter>\w)\w(\k<letter>)/;
+  return re.test(s);
+
   let res = false;
 
   for (let i = 1; i < s.length - 1; i++) {
@@ -68,6 +74,10 @@ function main() {
 
   r.addCloseListener(() => {
     console.log("total nice", totalNice);
+
+    if (totalNice != 55) {
+      throw Error("invalid response");
+    }
   });
 
   r.run();
